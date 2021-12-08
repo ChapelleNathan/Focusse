@@ -1,0 +1,8 @@
+<div class="card card_photo">
+    <img src="{{ photo.getPath }}" class="card-img-top" alt="photo posted by {{ photo.user.pseudo }}">
+    <div class="card-body">
+        <h2 class="fs-2">{{ photo.user.pseudo }}</h2>
+        <h3 class="fs-5 secondary">{{ photo.postedAt|date("m/d/Y") }} - {{ photo.postedAt|date('H:i') }}</h3>
+        <p class="card-text">{{ photo.message }}</p>
+    </div>
+</div>

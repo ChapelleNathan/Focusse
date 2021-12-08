@@ -18,6 +18,14 @@ class UserFixtures extends Fixture
             'email' => 'nathanchapelle76@gmail.com',
             'password' => 'jdbfqks',
             'profile_picture' => null,
+        ],
+        [
+            'firstname' => 'Clément',
+            'lastname' => 'Eischen',
+            'pseudo' => 'leklem',
+            'email' => 'grokon@gmail.com',
+            'password' => 'oisdqhf',
+            'profile_picture' => null,
         ]
     ];
     public function load(ObjectManager $manager): void

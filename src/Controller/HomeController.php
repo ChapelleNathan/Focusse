@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\Mapping\Annotation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,8 +15,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(): Response
+    public function index(PhotoRepository $photoRepository): Response
     {
-        return $this->render('home/index.html.twig');
+
+        return $this->render('home/index.html.twig', ['photos' => $photoRepository->findAll()]);
     }
 }

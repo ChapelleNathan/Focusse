@@ -1,45 +1,42 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}User index{% endblock %}
-
+{% extends "base.html.twig" %}
+{% block title %}
+{{ parent() }} - {{ user.pseudo }}
+{% endblock %}
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>ProfilePicture</th>
-                <th>Slug</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.profilePicture }}</td>
-                <td>{{ user.slug }}</td>
-                <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
+<div class="container">
+    <div class="presentation d-flex flex-column align-items-center">
+        <div class="row">
+            <div class="col">
+                <h1>Mon Profile :</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% if user.profilePicture == null %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
+                    class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+                {% else %}
+                <img src="" alt="profile picture of {{ user.pseudo }}">
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>{{ user.firstname|capitalize }} {{ user.lastname|capitalize }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for photo in user.photos %}
+        <div class="col-4">
+            {% include "photo/_card.html.twig" %}
+        </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+</div>
 {% endblock %}
