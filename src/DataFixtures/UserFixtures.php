@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends Fixture
@@ -21,7 +22,7 @@ class UserFixtures extends Fixture
     ];
     public function load(ObjectManager $manager): void
     {
-        foreach (self::USERS as $user) {
+        foreach (self::USERS as $key => $user) {
             $newUser = new User();
             $slug = new Slugify();
             $newUser->setFirstname($user['firstname']);
@@ -32,6 +33,7 @@ class UserFixtures extends Fixture
             $newUser->setProfilePicture($user['profile_picture']);
             $newUser->setSlug($slug->generate($newUser->getPseudo()));
             $manager->persist($newUser);
+            $this->setReference('user_' . $key, $newUser);
         }
         $manager->flush();
     }

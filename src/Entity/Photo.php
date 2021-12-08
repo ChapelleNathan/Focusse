@@ -32,6 +32,11 @@ class Photo
      */
     private $postedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="photos")
+     */
+    private $comments;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Photo
     public function setPostedAt(\DateTimeInterface $postedAt): self
     {
         $this->postedAt = $postedAt;
+
+        return $this;
+    }
+
+    public function getComments(): ?Comment
+    {
+        return $this->comments;
+    }
+
+    public function setComments(?Comment $comments): self
+    {
+        $this->comments = $comments;
 
         return $this;
     }
