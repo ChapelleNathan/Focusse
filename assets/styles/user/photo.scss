@@ -1,0 +1,11 @@
+@import '../variable.scss';
+
+img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    transition: 0.2s;
+}
+
+img:hover{
+    filter: brightness(50%)
+}

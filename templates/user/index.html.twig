@@ -1,4 +1,7 @@
 {% extends "base.html.twig" %}
+{% block stylesheets %}
+{{ encore_entry_link_tags('userPhoto') }}
+{% endblock %}
 {% block title %}
 {{ parent() }} - {{ user.pseudo }}
 {% endblock %}
@@ -32,8 +35,8 @@
     </div>
     <div class="row">
         {% for photo in user.photos %}
-        <div class="col-4">
-            {% include "photo/_card.html.twig" %}
+        <div class="col-3">
+            <img src="{{ photo.path }}" alt="photo de {{ user.pseudo }}">
         </div>
         {% endfor %}
     </div>
